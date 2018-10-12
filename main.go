@@ -27,6 +27,7 @@ var verbose bool
 var noBanner bool
 var noColors bool
 var noFancy bool
+var noNs bool
 var nsOverride string
 var checkCleanup bool
 var skipValidation bool
@@ -50,7 +51,9 @@ func main() {
 	}
 
 	// add/validate namespaces
-	addNamespaces(s.Namespaces)
+	if !noNs {
+		addNamespaces(s.Namespaces)
+	}
 
 	if r, msg := initHelm(); !r {
 		logError(msg)
