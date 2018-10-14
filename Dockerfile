@@ -11,8 +11,7 @@ RUN apk --no-cache add make git
 # RUN git clone https://github.com/bobhenkel/helmsman.git; cd helmsman; git checkout no_ns
 
 #  build a statically linked binary so that it works on stripped linux images such as alpine/busybox.
-RUN cd helmsman \
-    && LastTag=$(git describe --abbrev=0 --tags) \
+RUN LastTag=$(git describe --abbrev=0 --tags) \
     && TAG=$LastTag-$(date +"%d%m%y") \
     && LT_SHA=$(git rev-parse ${LastTag}^{}) \
     && LC_SHA=$(git rev-parse HEAD) \
