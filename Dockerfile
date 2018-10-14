@@ -2,7 +2,6 @@ FROM golang:1.10-alpine3.7 as builder
 
 # ENV GIT_REPO_URL https://github.com/Praqma/helmsman.git
 # ENV GIT BRANCH master
-ENV GOSS_VERSION=v0.3.6
 
 RUN mkdir /go/src/helmsman
 WORKDIR /go/src/helmsman
@@ -27,6 +26,7 @@ RUN apk add --update --no-cache ca-certificates git
 
 ARG HELM_VERSION=v2.11.0
 ARG KUBE_VERSION="v1.10.3"
+ARG GOSS_VERSION=v0.3.6
 
 RUN apk --no-cache update \
     && rm -rf /var/cache/apk/* \

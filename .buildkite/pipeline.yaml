@@ -1,7 +1,6 @@
 steps:
   - label: ":docker: Build/Test/Tag"
     command:
-      - docker run --rm hello-world
       - docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t $$PIPELINE_DOCKER_IMAGE .
       - docker run --rm $$PIPELINE_DOCKER_IMAGE $$PIPELINE_TEST_DOCKER_IMAGE_COMMAND
       - docker tag $$PIPELINE_DOCKER_IMAGE $${PIPELINE_DOCKER_REGISTRY_URL}/$${PIPELINE_DOCKER_IMAGE}
@@ -17,7 +16,6 @@ steps:
   - label: ":docker: Push"
     command: |
       set -eux
-        echo $$DOCKER_USER
         docker login -u $$DOCKER_USER -p $$DOCKER_PASS
         docker push $${PIPELINE_DOCKER_REGISTRY_URL}/$${PIPELINE_DOCKER_IMAGE}
         cat << EOF | buildkite-agent annotate --style 'success'
