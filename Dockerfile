@@ -22,7 +22,7 @@ RUN LastTag=$(git describe --abbrev=0 --tags) \
 
 # The image to keep
 FROM alpine:3.7
-COPY ./tests /tmp
+COPY ./tests /tmp/tests
 
 RUN apk add --update --no-cache ca-certificates git
 
