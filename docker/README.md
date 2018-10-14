@@ -1,5 +1,5 @@
 ---
-version: v0.1.2X
+version: v0.1.2
 ---
 # Building Image
 ```
