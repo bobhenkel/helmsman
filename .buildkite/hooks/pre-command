@@ -8,7 +8,7 @@ then
 else
   PIPELINE_IMAGE_TAG="${BUILDKITE_TAG}-${BUILDKITE_BRANCH}-${BUILDKITE_COMMIT}"
 fi
-PIPELINE_TEST_DOCKER_IMAGE_COMMAND="goss --gossfile /tmp/tests/goss.yaml validate --color --format documentation"
+PIPELINE_TEST_DOCKER_IMAGE_COMMAND="goss --gossfile ./tests/goss.yaml validate --color --format documentation"
 PIPELINE_DOCKER_REGISTRY_URL="henkbl/helmsman"
 PIPELINE_APP_UNIT_TEST_COMMAND="echo TODO"
 
