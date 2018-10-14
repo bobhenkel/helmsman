@@ -20,8 +20,8 @@ RUN cd helmsman \
 FROM alpine:3.7
 RUN apk add --update --no-cache ca-certificates git
 
-ARG HELM_VERSION=v2.10.0
-ARG KUBE_VERSION="v1.11.3"
+ARG HELM_VERSION=v2.11.0
+ARG KUBE_VERSION="v1.10.3"
 
 RUN apk --no-cache update \
     && rm -rf /var/cache/apk/* \
@@ -43,8 +43,8 @@ RUN mkdir -p ~/.helm/plugins \
     && helm plugin install https://github.com/nouney/helm-gcs \
     && helm plugin install https://github.com/databus23/helm-diff \
     && helm plugin install https://github.com/futuresimple/helm-secrets \
-    && rm -r /tmp/helm-diff /tmp/helm-diff.tgz
+    && rm -r /tmp/helm-diff /tmp/helm-diff.tgz \
+    && cd /tmp; wget https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.3.0/heptio-authenticator-aws_0.3.0_linux_amd64; mv heptio-authenticator-aws_0.3.0_linux_amd64 heptio-authenticator-aws; chmod +x heptio-authenticator-aws; mv heptio-authenticator-aws /usr/local/bin
 
 WORKDIR /tmp
 # ENTRYPOINT ["/bin/helmsman"]
-
