@@ -1,9 +1,14 @@
 FROM golang:1.10-alpine3.7 as builder
 
+# ENV GIT_REPO_URL https://github.com/Praqma/helmsman.git
+# ENV GIT BRANCH master
+
 WORKDIR /go/src/
+COPY . /go/src/
 
 RUN apk --no-cache add make git
-RUN git clone https://github.com/Praqma/helmsman.git
+
+# RUN git clone https://github.com/bobhenkel/helmsman.git; cd helmsman; git checkout no_ns
 
 #  build a statically linked binary so that it works on stripped linux images such as alpine/busybox.
 RUN cd helmsman \
