@@ -2,10 +2,11 @@ FROM golang:1.10-alpine3.7 as builder
 
 # ENV GIT_REPO_URL https://github.com/Praqma/helmsman.git
 # ENV GIT BRANCH master
+ENV GOSS_VERSION=v0.3.6
 
-WORKDIR /go/src/
-COPY . /go/src/
-
+RUN mkdir /go/src/helmsman
+WORKDIR /go/src/helmsman
+COPY . /go/src/helmsman
 RUN apk --no-cache add make git
 
 # RUN git clone https://github.com/bobhenkel/helmsman.git; cd helmsman; git checkout no_ns
@@ -35,7 +36,12 @@ RUN apk --no-cache update \
     && curl -L http://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar zxv -C /tmp \
     && mv /tmp/linux-amd64/helm /usr/local/bin/helm \
     && chmod +x /usr/local/bin/helm \
-    && rm -rf /tmp/linux-amd64
+    && rm -rf /tmp/linux-amd64 \
+    && curl -L https://github.com/aelsabbahy/goss/releases/download/${GOSS_VERSION}/goss-linux-amd64 -o /usr/local/bin/goss \
+    && chmod +x /usr/local/bin/goss
+
+
+
 
 COPY --from=builder /go/bin/helmsman   /bin/helmsman
 

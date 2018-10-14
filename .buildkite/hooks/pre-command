@@ -2,8 +2,13 @@ set -eu
 echo '--- :house_with_garden: Executing post-checkout script'
 
 PIPELINE_DOCKER_IMAGE="helmsman:${BUILDKITE_BRANCH}-${BUILDKITE_COMMIT}"
-PIPELINE_IMAGE_TAG="${BUILDKITE_BRANCH}-${BUILDKITE_COMMIT}"
-PIPELINE_TEST_DOCKER_IMAGE_COMMAND="helmsman -v"
+if [ -z "$BUILDKITE_TAG" ]
+then
+  PIPELINE_IMAGE_TAG="${BUILDKITE_BRANCH}-${BUILDKITE_COMMIT}"
+else
+  PIPELINE_IMAGE_TAG="${BUILDKITE_TAG}-${BUILDKITE_BRANCH}-${BUILDKITE_COMMIT}"
+fi
+PIPELINE_TEST_DOCKER_IMAGE_COMMAND="goss --gossfile /tmp/tests/tests/goss.yaml validate --color --format documentation"
 PIPELINE_DOCKER_REGISTRY_URL="henkbl/helmsman"
 PIPELINE_APP_UNIT_TEST_COMMAND="echo TODO"
 

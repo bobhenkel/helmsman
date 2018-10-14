@@ -1,0 +1,26 @@
+file:
+  /etc/os-release:
+    # required attributes
+    exists: true
+    # optional attributes
+    contains:
+    - "16.04"
+
+command:
+  helmsman -v :
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stderr: []
+    stdout:
+    - v1.6.2
+    timeout: 10000 # in milliseconds
+
+  goss --version :
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stderr: []
+    stdout:
+    - goss version v0.3.6
+    timeout: 10000 # in milliseconds
