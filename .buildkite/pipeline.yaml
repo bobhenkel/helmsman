@@ -19,7 +19,7 @@ steps:
   - label: ":docker: Push"
     command: |
       set -eu
-        docker push $${PIPELINE_DOCKER_REGISTRY_URL}/$${PIPELINE_DOCKER_IMAGE}
+        docker push $${PIPELINE_DOCKER_REGISTRY_URL}:$${PIPELINE_IMAGE_TAG}
         cat << EOF | buildkite-agent annotate --style 'success'
         Docker image built: <b>$$PIPELINE_IMAGE_TAG</b>
 
