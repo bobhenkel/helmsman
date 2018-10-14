@@ -4,7 +4,12 @@ file:
     exists: true
     # optional attributes
     contains:
-    - "16.04"
+    - 3.7
+
+file:
+  /root/.helm/plugins:
+    # required attributes
+    exists: true
 
 command:
   helmsman -v :
@@ -14,6 +19,69 @@ command:
     stderr: []
     stdout:
     - v1.6.2
+    timeout: 10000 # in milliseconds
+
+  kubectl version --client=true :
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stderr: []
+    stdout:
+    - 1.10.3
+    timeout: 10000 # in milliseconds
+
+  helm version --client :
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stderr: []
+    stdout:
+    - v2.11.0
+    timeout: 10000 # in milliseconds
+
+  sha256sum /usr/local/bin/heptio-authenticator-aws :
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stderr: []
+    stdout:
+    - 4b8ecce88f4749338e361baf1fba9f8970efed0ac3f58cc40b4979bc0d86eb7b  /usr/local/bin/heptio-authenticator-aws
+    timeout: 10000 # in milliseconds
+
+  find /root/.helm/plugins/helm-s3.git/ -type f -exec sha256sum {} \; | sort -k 2 | sha256sum :
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stderr: []
+    stdout:
+    - 094fed1b07eff411188b1386c6265d0523c2750ee357a530ad4643592fc58410  -
+    timeout: 10000 # in milliseconds
+
+  find /root/.helm/plugins/helm-gcs/ -type f -exec sha256sum {} \; | sort -k 2 | sha256sum :
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stderr: []
+    stdout:
+    - 9e33d1ac19806b3a5abd2e276ac390c30d534b75855e2ac9cd2f3db9c846176b  -
+    timeout: 10000 # in milliseconds
+
+  find /root/.helm/plugins/helm-diff/ -type f -exec sha256sum {} \; | sort -k 2 | sha256sum :
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stderr: []
+    stdout:
+    - 957ed45bbfa501b5ddca3deb855bd6a5edf97b61a8e04ab2c3ebe6baf6ccef99  -
+    timeout: 10000 # in milliseconds
+
+  find /root/.helm/plugins/helm-secrets/ -type f -exec sha256sum {} \; | sort -k 2 | sha256sum :
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stderr: []
+    stdout:
+    - 0655fb0450bad1b965228306e4197b772858b54e03b7358e1b68c9fdffd5abd8  -
     timeout: 10000 # in milliseconds
 
   goss --version :
