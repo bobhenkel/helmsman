@@ -22,6 +22,8 @@ RUN LastTag=$(git describe --abbrev=0 --tags) \
 
 # The image to keep
 FROM alpine:3.7
+COPY ./tests /tmp
+
 RUN apk add --update --no-cache ca-certificates git
 
 ARG HELM_VERSION=v2.11.0
