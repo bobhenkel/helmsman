@@ -6,27 +6,22 @@ file:
     contains:
     - 3.7
 
-file:
   /root/.helm/plugins:
     # required attributes
     exists: true
 
-file:
   /root/.helm/plugins/helm-s3.git:
     # required attributes
     exists: true
 
-file:
   /root/.helm/plugins/helm-gcs:
     # required attributes
     exists: true
 
-file:
   /root/.helm/plugins/helm-diff:
     # required attributes
     exists: true
 
-file:
   /root/.helm/plugins/helm-secrets:
     # required attributes
     exists: true
