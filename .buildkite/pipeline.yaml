@@ -16,7 +16,7 @@ steps:
   - label: ":docker: Push"
     command: |
       set -eux
-        docker login -u $$DOCKER_USER -p $$DOCKER_PASS
+        docker login -u $${DOCKER_USER} -p $${DOCKER_PASS}
         docker push $${PIPELINE_DOCKER_REGISTRY_URL}/$${PIPELINE_DOCKER_IMAGE}
         cat << EOF | buildkite-agent annotate --style 'success'
         Docker image built: <b>$$PIPELINE_IMAGE_TAG</b>
