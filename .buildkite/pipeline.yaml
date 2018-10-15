@@ -1,7 +1,7 @@
 steps:
   - label: ":docker: Build/Test/Tag"
     command:
-      - ./build_and_tag_docker.sh
+      - .build_and_tag_docker.sh
     agents:
       queue: 'default'
 
