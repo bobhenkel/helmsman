@@ -1,8 +1,13 @@
 set -eu
 echo '--- :house_with_garden: Executing post-checkout script'
 
-#This will be the branch name typically or will match the git tag/branch name if the image is being built based on a tag being created.
-PIPELINE_IMAGE_TAG="${BUILDKITE_BRANCH}-${BUILDKITE_COMMIT}"
+if [ -z "$BUILDKITE_TAG" ]
+then
+  PIPELINE_IMAGE_TAG="${BUILDKITE_BRANCH}-${BUILDKITE_COMMIT}"
+else
+  PIPELINE_IMAGE_TAG="${BUILDKITE_TAG}-${BUILDKITE_BRANCH}-${BUILDKITE_COMMIT}"
+fi
+
 PIPELINE_TEST_DOCKER_IMAGE_COMMAND="goss --gossfile /tmp/tests/docker/goss.yaml validate --color --format documentation"
 PIPELINE_DOCKER_REGISTRY_URL="henkbl/helmsman"
 PIPELINE_APP_UNIT_TEST_COMMAND="echo TODO"
