@@ -1,7 +1,11 @@
 steps:
   - label: ":docker: Build/Test/Tag"
     command:
-      - .buildkite/build_and_tag_docker.sh
+      - ./buildkite/build_and_tag_docker.sh
+    env:
+        PIPELINE_TEST_DOCKER_IMAGE_COMMAND: ${PIPELINE_TEST_DOCKER_IMAGE_COMMAND}
+        PIPELINE_DOCKER_REGISTRY_URL: ${PIPELINE_DOCKER_REGISTRY_URL}
+        PIPELINE_IMAGE_TAG: ${PIPELINE_IMAGE_TAG}
     agents:
       queue: 'default'
 
